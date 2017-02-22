@@ -1,69 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+•
 <head>
-    <meta charset="UTF-8">
-    <title>Ejercicio AJAX</title>
-    <link rel="stylesheet" href="css/index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="js/jquery_mobile/jquery.mobile-1.4.5.min.css">
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="js/jquery_mobile/jquery.mobile-1.4.5.min.js"></script>
 </head>
-<script src="js/jquery-3.1.1.min.js"></script>
-<script>
-
-    var datos;
-
-    function cargarClick() {
-        $("li").click(function () {
-            console.log(datos);
-            detalleUsuario($(this));
-        });
-    }
-
-    function detalleUsuario(el) {
-        var $divLista = $("#divLista");
-        var $divDetalle = $("#divDetalle");
-
-        $divLista.fadeOut(100);
-
-        for (var i in datos) {
-            if (datos[i].name.first == el.text()) {
-                $divDetalle.append("<img src='" + datos[i].picture.large + "'><br>");
-                $divDetalle.append(datos[i].name.first + " " + datos[i].name.last + "<br>");
-                $divDetalle.append(datos[i].gender + "<br>");
-                $divDetalle.append(datos[i].dob + "<br>");
-                $divDetalle.append(datos[i].email + "<br>");
-            }
-        }
-
-        $("#atras").click(function () {
-            $divDetalle.fadeOut(100);
-            $divDetalle.empty();
-            $divLista.fadeIn(800);
-            $divDetalle.append("<div><button id='atras'>Atrás</button></div>");
-        });
-        $divDetalle.fadeIn(800);
-    }
-    $(document).ready(function () {
-        $.ajax({
-            url: 'https://randomuser.me/api/?results=5',
-            dataType: 'json',
-            success: function (data) {
-                $("#divDetalle").hide();
-                for (var i in data.results) {
-                    $("#listaUsuarios").append("<li>" + data.results[i].name.first + "</li>")
-                }
-                datos = data.results;
-                cargarClick();
-            }
-        });
-    });
-
-</script>
 <body>
-<div id="divLista">
-    <ul id="listaUsuarios">
-    </ul>
-</div>
-<div id="divDetalle">
-    <div><button id="atras">Atrás</button></div>
+<div data-role="page" id="pageone">
+    <div data-role="panel" id="myPanel" data-display="reveal" data-position="right">
+        <h2>Panel Header</h2>
+        <p>You can close the panel by clicking outside the panel, pressing the Esc key or by swiping.</p>
+    </div>
+    <div data-role="header">
+        <h1>Page Header</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        <p>Click on the button below to open the Panel.</p>
+        <a href="#myPanel" class="ui-btn ui-btn-inline ui-corner-all ui-shadow">Open Panel</a>
+    </div>
+    <div data-role="footer">
+        <h1>Page Footer</h1>
+    </div>
 </div>
 </body>
 </html>
